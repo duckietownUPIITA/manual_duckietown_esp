@@ -1,2 +1,2 @@
-# manual_duckietown_esp
-Resumen Duckiebook en español
+# J18
+journal for keeping track of my stuff

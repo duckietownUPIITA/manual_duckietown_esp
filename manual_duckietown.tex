@@ -1,0 +1,597 @@
+\documentclass[12pt]{article}
+\usepackage{tma}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{scrextend}
+\usepackage{booktabs}
+\usepackage{listings}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\addtokomafont{labelinglabel}{\sffamily}
+
+
+\marginnotes
+\myname{UPIITA-IPN}
+%\mypin{}
+\mycourse{Manual Duckietown}
+\mytma{01}
+
+\lhead{Manual Duckietown}
+\chead{}
+
+\begin{document}
+
+
+\hfill\fbox{Last Entry: \today}
+
+\tableofcontents
+\pagebreak
+
+\section{Repositorio Duckietown-UPIITA}
+
+Hacer un repositorio para el duckietown de upiita, para configuraciones (Duckiefleet).
+
+%--------------------------------------------------------------------------
+%--------------------------------DUCKIEBOT---------------------------------
+%--------------------------------------------------------------------------
+
+\section{Duckiebots: Materiales y Configuración}
+
+En esta sección se encuentra la información relevante a las diferentes configuraciones de los Duckiebots. Debido a la naturaleza del Duckietown (que sea accesible y de bajo costo), se propone utilizar la configuración más básica del Duckiebot (db17). Consecuentemente, no se describirán todos los componentes que se utilizan en cada una de las diferentes configuraciones de los Duckiebots. 
+
+
+%--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+
+\subsection{Hardware: Configuraciones y Materiales}
+
+
+El Duckiebot utilizado por las universidades participantes en el 2017, el cual pasó a ser el estándar, fue denominado \textbf{DB17}. Se disenaron cinco diferentes configuraciones para el DB17. Dependiendo de la configuracion, se le agrega una etiqueta a la configuracion \textbf{DB17-} dependiendo de los aditamentos que tenga, por lo que un Duckiebot con todas los aditamentos sería \textbf{DB17-wjdcl}:
+
+\begin{itemize}
+
+	\item \textbf{w}: adaptador WiFi de 5 GHz para facilitar la trnasmision de imagenes
+	\item \textbf{j}: joypad para utilizarlo como control remoto \marginpar{Se utilizara un joypad virtual como control remoto.}
+	\item \textbf{d}: memoria USB adicional para ampliar la apacidad de almacenaje
+	\item \textbf{c}: se reemplaza el balín omni-direccional que viene con el chassis por una rueda loca \marginpar{en nuestro caso, la mayoria de los chassis que se consiguen en México tienen vienen con una rueda loca en lugar del balín.}
+	\item \textbf{l}: implementacion de LEDs y un LED Hat para la comunicacion explicita entre Duckiebots. 
+
+\end{itemize}
+
+\subsubsection{DB17}
+
+La configuracion base para el Duckiebot solo ejecutará las funciones más basicas, por lo que no podrá operar en conjunto con otros Duckiebots. 
+
+\begin{itemize}
+
+	\item \textbf{Función}: El Duckiebot \textbf{BD17} será capaz de navegar autonomamente en un Duckietown, pero no se podrá comunicar con otros Duckiebots.
+	\item \textbf{Componentes}: Los materiales necesario para la configuración DB17 son:
+ 
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\caption{Componentes para la configuración DB17}
+\label{my-label}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Componente                                    & Precio \\ \midrule
+Chassis                                       & TBA    \\
+Cámara gran-angular de 160 grados             & TBA    \\
+Soporte para la cámara                        & TBA    \\
+Raspberry Pi 3B                               & TBA    \\
+Disipadores de calor p/ Raspberry Pi          & TBA    \\
+Eliminador de voltaje p/ Raspberry Pi         & TBA    \\
+Micro SD de 16GB Clase 10                     & TBA    \\
+DC Motor Hat                                  & TBA    \\
+Cable USB                                     & TBA    \\
+Power Bank 2 entradas a 2A ($\sim$10,000mAh)  & TBA    \\
+Headers p/ Raspberry Pi                       & TBA    \\
+16 x Coples Macho-Hembra de Nylon (M2.5 12mm) & TBA    \\
+4 x Tuercas Hexagonales de Nylon (M2.5)       & TBA    \\
+4 x Tornillos de Nylon (M2.5x10mm)            & TBA    \\
+2 x Sinchos (300x5mm)                         & TBA    \\
+COSTO TOTAL \textbf{DB17}    & TBA    \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Para la descripción de las otras configuraciones, diríjase a https://bit.ly/2J5kanP.
+
+Para las instrucciones de ensamble del Duckiebot desde cero, se recomienda leer las unidades \href{https://bit.ly/2H4EqDV}{A-2} a la \href{https://bit.ly/2L3H536}{A-6} del Duckiebook.
+
+%--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+
+\section{Software: Ubuntu en Raspberry Pi y Computadora}
+
+\subsection{Reproducción de la imágen y comunicación con el Duckiebot}
+
+Para reproducir la imagen del Duckiebot en la Raspberry Pi, no es necesario intalar ubuntu y todos los paquetes por separado. En la \href{https://bit.ly/2xBma5N}{guía de instalación del Duckiebot} se proporciona un link donde es posible descargar una imágen completa de ubuntu y todos los paquetes y librerias indispensables para un Duckiebot. Es necesario contar con una microSD de al menos 16GB de memoria, para asegurar el correcto funcionamiento del Duckiebot. 
+
+Una vez instalado el software en la Raspberry Pi, es necesaria una conexión via Ethernet a la red que esté conectada la laptop que se usará para configurar el nuevo Duckiebot---de manera que se pueda establecer una comunicación con el Duckiebot via SSH. El usuario del Duckiebot por default es \texttt{duckiebot-not-configured}. Para conectarse desde la computadora, en la terminal de ubuntu:
+
+\begin{lstlisting}[language=bash]
+  $ ssh ubuntu@duckiebot-not-configured.local
+\end{lstlisting}
+
+La contraseña es \texttt{ubuntu}.
+
+\subsubsection{Nombrar al Duckiebot}
+
+El siguiente paso es cambiar de usuario, i.e., nombrar al Duckiebot. El nombre tiene que ser corto y con caracteres alfabeticos (nada de números u otros símbolos). Para cambiar el usuario, en la terminal con la que se ssh-eo al Duckiebot:
+
+\begin{lstlisting}[language=bash]
+  $ sudo nano /etc/hostname
+\end{lstlisting} 
+
+y editar el nombre \texttt{duckiebot-not-configured} por el nuevo nombre de su Duckiebot. De la misma manera:
+
+\begin{lstlisting}[language=bash]
+  $ sudo nano /etc/hosts
+\end{lstlisting}
+
+y cambiar el mismo nombre por el nuevo elegido. Las primeras dos líneas de del archivo \texttt{/etc/hosts} deben ser:
+
+
+\begin{lstlisting}[language=bash]
+  127.0.0.1	localhost
+  127.0.1.1 DUCKIEBOT
+\end{lstlisting}
+
+donde \textbf{DUCKIEBOT} es el nuevo nombre de su Duckiebot. Por último se tiene que reiniciar el Duckiebot con \texttt{sudo reboot}.
+
+\subsubsection{Expansión del Sistema de Archivos}
+
+Para que toda la memoria que tiene la tarjeta SD sea utlilizable, se recomienda expandir la memoria del sistema. Para hacer esto, en la terminal del Duckiebot en la comptadora:
+
+\begin{lstlisting}[language=bash]
+  $ sudo raspi-config --expand-rootfs
+\end{lstlisting}
+
+y reiniciar con \texttt{sudo shutdown -r now}
+
+\subsubsection{Crear tu Usuario}
+
+Para desarrollo, no se debe implementar el usuario \texttt{ubuntu}. Para crear un nuevo usuario:
+
+
+\begin{lstlisting}[language=bash]
+  $ sudo useradd -m USUARIO
+\end{lstlisting}
+
+se debe reemplazar la palabra \texttt{USUARIO} por su nombre de usuario elegido. Para concederle privilegios de administrador (y para hacerlo miembro de los grupos \texttt{input, video, i2c}) al nuevo usuario:
+
+\begin{lstlisting}[language=bash]
+  $ sudo adduser USUARIO sudo
+  $ sudo adduser USUARIO input
+  $ sudo adduser USUARIO video
+  $ sudo adduser USUARIO i2c
+\end{lstlisting}
+
+Se denomina \texttt{bash} como nuestra \textit{shell}:
+
+\begin{lstlisting}[language=bash]
+  $ sudo chsh -s /bin/bash USUARIO
+\end{lstlisting}
+
+Y por ultimoo se designa una nueva contraseña:
+
+\begin{lstlisting}[language=bash]
+  $ sudo passwd USUARIO
+\end{lstlisting}
+
+Hasta este punto, ya se debe de poder conectarse con el Duckiebot con el siguiente comando desde la computadora:
+
+\begin{lstlisting}[language=bash]
+  $ ssh USUARIO@DUCKIEBOT.local
+\end{lstlisting}
+
+\subsubsection{SSH Keypair}\marginpar{El Duckiebook en PDF se actualiza constantemente, la sección de puede encontrar también con el nombre de \textit{How to log in without a password}.}
+
+Para facilitar aún más la accesibilidad, el usuario puede configurar un SSH Keypair entre la computadora y el Duckiebot para conectarse sin la necesidad de una contraseña. El procedimiento es descrito en la sección 19.6 del \href{https://http://book.duckietown.org/master/duckiebook.pdf}{Duckiebook en PDF}.
+
+\subsubsection{Alias para SSH}
+
+Como buena práctica, en lugar de tener que escribir \texttt{ssh USUARIO@DUCKIEBOT.local} cada vez que uno desea conectarse con el Duckiebot, se crea un alias para SSH que permite al usuario conectarse rápidamente con \texttt{ssh DUCKIEBOT}. Para lograrlo:
+
+
+\begin{lstlisting}[language=bash]
+  $ sudo nano ~/.ssh/config
+\end{lstlisting}
+
+y se agrega:
+
+
+\begin{lstlisting}[language=bash]
+  Host DUCKIEBOT
+  	User USUARIO
+  	Hostname DUCKIEBOT.local
+\end{lstlisting}
+
+
+%--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+
+\subsection{Configuracion de la Red}
+
+Es de suma importancia que el Duckiebot tenga una red inalambrica configurada para evitar el uso del cable ethernet. Ya que se haya comunicado con el Duckiebot via SSH, se utiliza el siguiente comando para conocer las redes disponibles al Duckiebot:
+
+\begin{lstlisting}[language=bash]
+  $ nmcli dev wifi list
+\end{lstlisting}
+
+La red a la que se desea conectar (SSID) debe de aparecer en una lista. Si se conoce la contraseña:
+
+\begin{lstlisting}[language=bash]
+  $ sudo nmcli dev wifi con SSID password CONTRASENA
+\end{lstlisting}
+
+En el caso de que se desee configurar una red que no es privada, o que sea necesario introducir un usuario y contraseña, seguir las \href{https://bit.ly/2JkTQtb}{instrucciones} en el Duckiebook.
+
+%--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+
+\subsection{Configuración para Git}
+
+Git es una herramienta importante para controlar el flujo de trabajo cuando existen varias personas colaborando en los mismos documentos. Se recomienda echarle un vistazo a \href{https://git-scm.com/book/en/v2}{este libro} si no se sabe absolutamente nada sobre el control de versiones, y para entender como funciona el flujo de trabajo (\textit{work flow}) se recomienda \href{https://nvie.com/posts/a-successful-git-branching-model/}{este link}.
+
+Para instalar Git y herramientas adicionales, tanto en la computadora como en el Duckiebot:
+
+\begin{lstlisting}[language=bash]
+  $ sudo apt install git
+  $ sudo apt install git-extras
+\end{lstlisting}
+
+De igual manera, en la computadora y en el robot, se debe avisar a Git quien eres:
+
+\begin{lstlisting}[language=bash]
+  $ git config --global user.email "EMAIL"
+  $ git config --global user.name "NOMBRE COMPLETO"
+  $ git config --global push.default simple
+\end{lstlisting}
+
+Para más tips, \href{https://bit.ly/2sDGz4x}{ver la Duckumentation}.
+
+\subsubsection{Acceso a Github}
+
+Para poder accesar a Github desde la terminal de ubuntu (laptop y robot), se deben seguir una serie de pasos en los que se debe crear una cuenta en Github y agregar la \textit{public key} del robot y de la laptop. Éste procedimiento se encuentra descrito con bastante claridad en la \href{https://bit.ly/2srMPNd}{Unidad D-3} del Duckiebook. Si surge alguna complicación, es posible que a alguien más ya le haya pasado, los foros de la comunidad de Github son muy claros en cuanto a la resolución de inconvenientes. 
+
+
+\subsubsection{Hardware Check: Cámara}
+
+Ya que se tiene conectada correctamente la cámara, se debe asegurar que funcione correctamente. En una terminal del robot:
+
+ \begin{lstlisting}[language=bash]
+  $ vcgencmd get_camera
+  supported=1 detected=1
+\end{lstlisting}
+
+En el caso de obtener \texttt{detected=0}, significa que no está bien conectada la cámara a la Raspberry Pi. Utilizando el comando:
+
+\begin{lstlisting}[language=bash]
+  $ raspistill -t 1 -o out.jpg
+\end{lstlisting}
+
+se puede capturar una fotografía con la cámara, y se puede utilizar scp para descargar la foto a la computadora y verificar que la cámara funcione correctamente. Este paso es muy importante, así se puede verificar que el lente de la cámara se encuentre enfocado correctamente. Para conocer más sobre cómo usar \texttt{scp} se invita a leer la sección \href{https://bit.ly/2sCVuvN}{21.1.1} del Duckiebook.
+
+\subsubsection{Toques estéticos opcionales}
+
+Para agregar algunos toques estéticos cuando el usuario se conecta al Duckiebot, leer la sección \href{https://bit.ly/2xDs5aj}{A-9.14}.
+
+%-------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+
+\subsection{Software} \marginpar{Es indispensable que se haya configurado correctamente git en este punto.}
+
+El siguiente paso despúes de toda la configuración inicial de la computadora y del Duckiebot, es intalar todo el software relacionado con el curso de Duckietown hasta ahora. El primer paso es clonar el repositorio de Duckietown, tanto en el robot como en la computadora:
+
+\begin{lstlisting}[language=bash]
+  $ git clone git@github.com:duckietown/Software.git ~/duckietown
+\end{lstlisting}
+
+\subsubsection{Dependencias}
+
+Dado que el repositorio del software de Duckietown cambia todos los dias, es importante mantener las dependencias actualizadas:
+
+\begin{lstlisting}[language=bash]
+  $ cd ~/duckietown
+  $ /bin/bash ./dependencies_for_duckiebot.sh
+\end{lstlisting}
+
+\subsubsection{ROS en el Duckiebot}
+
+Para instalar ROS en el Duckiebot, desde una terminal del robot:
+
+\begin{lstlisting}[language=bash]
+  $ cd ~/duckietown
+  $ source /opt/ros/kinetic/setup.bash
+  $ catkin_make -C catkin_ws/
+\end{lstlisting}
+%--------------------------------------------------------------------------
+%--------------------------------DUCKIETOWNS-------------------------------
+%--------------------------------------------------------------------------
+
+\section{Duckietowns: Materiales y Especificaciones}
+
+
+%--------------------------------------------------------------------------
+%--------------------------------DEMOS-------------------------------------
+%--------------------------------------------------------------------------
+
+\section{Duckietown Demos}
+
+Todos los demos, como implemtnarlos y donde estan. No olvidar joystick (branch: jukindle)
+
+
+
+
+%--------------------------------------------------------------------------
+%--------------------------------CURSOS------------------------------------
+%--------------------------------------------------------------------------
+
+\section{Duckietown Lectures}
+
+\subsection{Intro AV}
+
+%--------------------------------------------------------------------------
+
+\subsection{Architectures}
+
+Prerequisites: BSc level preparation.
+
+\begin{enumerate}
+
+	\item Modern Robotic Systems: robotic systems, modern development methods and tools.
+	\item Software Architectures ans Middle-wares for Robotics: explains robotics middlewares.
+	\item System Architectures Basics: Physical and logical architecture, deployment as a graph mapping problem. 
+	\item Autonomy Architecture Basics: Design boundary controller/plant world/agent, 4D/RCS architecture, top-down/bottom-up attention.
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Networking}
+
+Prerequisites: None.
+
+\begin{enumerate}
+
+	\item Network for Robotics: Networking Layers; IP addresses and subnets; IP, TCP-IP, UDP; NAT; DNS.
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Version Control}
+
+Prerequisites: None.
+
+\begin{enumerate}
+
+	\item Version control with Git: why use git?
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Intro to ROS}
+
+Prerequisites: Autonomy architectures, software architectures.
+
+\begin{enumerate}
+
+	\item Introduction to ROS: Basic ROS concepts. 
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Modeling}
+
+Prerequisites: Reference frames, basic kinematics, basic dynamics.
+
+\begin{enumerate}
+
+	\item Modeling of a Differential Drive Vehicle: DC motor model; bot dynamic model; kinematic constraints; kinematic model.
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Odometry Calibration}
+
+Prerequisites: Modeling of differential drive robot.
+
+\begin{enumerate}
+
+	\item Odometry Calibration: Odometry calibration problem, typical solution and Duckietown solution; project ideas.
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Signal Processing}
+
+Prerequisites: Basic time-series
+
+\begin{enumerate}
+
+	\item Modern Signal Processing: event-based vs. periodic processing; latency, frequency, throughput.
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Computer Vision}
+
+Prerequisites: Matrix operations, coordinate systems, reference frames, transformations.
+
+Comments: There are dedicated in-depth slides for every subject in the slides (computer vision intro, camera models, camera calibration).
+
+\begin{enumerate}
+
+	\item Computer Vision Basics (I): Computer vision overview, pinhole camera model, effect lenses, projective geometry, integrative nature, camera calibration. 
+
+\end{enumerate}
+
+%---------------------------------------------------------------------------
+
+Prerequisites: Camera models, image acquisition
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Image Filtering: Linear filtering, convolutions, common image filtering operation, gaussian kernel.
+
+\end{enumerate}
+
+%---------------------------------------------------------------------------
+
+Prerequisites: Perspective geometry, linear filters and convolution.
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Line Detection: Review of linear filtering; finite differences; derivative of Gaussian filters; Role of smoothing; Gradient-based edge detection; Lane detection and estimation.
+
+\end{enumerate}
+
+%---------------------------------------------------------------------------
+
+Prerequisites: Perspective geometry, linear filters and convolution 
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Feature Extraction: Corner detection; scale-invariant detectors; scale-invariant descriptors. 
+
+\end{enumerate}
+
+
+%---------------------------------------------------------------------------
+
+Prerequisites: Corner detection, scale-invariant detectors, scale-invariant descriptors. 
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Place Recognition: Image retrieval; bag-of-words representations; precision and recall.
+
+\end{enumerate}
+
+
+%--------------------------------------------------------------------------
+
+\subsection{Estimation}
+
+Prerequisites: Probability Basics
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Filtering Basics: Review of basic probabilistic concepts; Bayes' theorem; Bayes' filter; sampling and discretization; lane filtering in Duckietown.
+
+\end{enumerate}
+
+%---------------------------------------------------------------------------
+
+Prerequisites: Filtering basics
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Introduction to SLAM: Mapping; Simultaneous Localization and Mapping.
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Control}
+
+Prerequisites: Linear algebra, fundamentals of modeling and control.
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Control Systems Module I: Control Systems Basics: Stability, Performance, robustness. 
+
+\end{enumerate}
+
+%---------------------------------------------------------------------------
+
+Prerequisites: Notions of Lyapunov control.
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Control Systems Module II - Review of self-driving car controls: State of the art; pure pursuit; Lyapunov control; feedback linearization; model predictive control.
+
+\end{enumerate}
+
+%---------------------------------------------------------------------------
+
+Prerequisites: Linear Algebra, fundamental of modeling and control.
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Control Systems Module III - Duckietown Implementation: PID control intuition, Duckietown implementation, open problems.
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Planning}
+
+Prerequisites: Pose geometry, kinematic models.
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Introduction to Motion Planning: basic motion planning formalization, classic solution techniques.
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+
+\subsection{Project Phase}
+
+Prerequisites: All of the previous, basics of autonomy.
+
+Comments: 
+
+\begin{enumerate}
+
+	\item Putting Things Together: Project coordinators; verification and validation; testing strategies. 
+
+\end{enumerate}
+
+%--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+
+
+
+
+
+
+\end{document}
+

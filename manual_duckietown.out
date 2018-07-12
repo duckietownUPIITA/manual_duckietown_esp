@@ -1,0 +1,35 @@
+\BOOKMARK [1][-]{section.1}{Repositorio Duckietown-UPIITA}{}% 1
+\BOOKMARK [1][-]{section.2}{Duckiebots: Materiales y Configuraci\363n}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Hardware: Configuraciones y Materiales}{section.2}% 3
+\BOOKMARK [3][-]{subsubsection.2.1.1}{DB17}{subsection.2.1}% 4
+\BOOKMARK [1][-]{section.3}{Software: Ubuntu en Raspberry Pi y Computadora}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Reproducci\363n de la im\341gen y comunicaci\363n con el Duckiebot}{section.3}% 6
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Nombrar al Duckiebot}{subsection.3.1}% 7
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Expansi\363n del Sistema de Archivos}{subsection.3.1}% 8
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Crear tu Usuario}{subsection.3.1}% 9
+\BOOKMARK [3][-]{subsubsection.3.1.4}{SSH Keypair}{subsection.3.1}% 10
+\BOOKMARK [3][-]{subsubsection.3.1.5}{Alias para SSH}{subsection.3.1}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Configuracion de la Red}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.3}{Configuraci\363n para Git}{section.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Acceso a Github}{subsection.3.3}% 14
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Hardware Check: C\341mara}{subsection.3.3}% 15
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Toques est\351ticos opcionales}{subsection.3.3}% 16
+\BOOKMARK [2][-]{subsection.3.4}{Software}{section.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.4.1}{Dependencias}{subsection.3.4}% 18
+\BOOKMARK [3][-]{subsubsection.3.4.2}{ROS en el Duckiebot}{subsection.3.4}% 19
+\BOOKMARK [1][-]{section.4}{Duckietowns: Materiales y Especificaciones}{}% 20
+\BOOKMARK [1][-]{section.5}{Duckietown Demos}{}% 21
+\BOOKMARK [1][-]{section.6}{Duckietown Lectures}{}% 22
+\BOOKMARK [2][-]{subsection.6.1}{Intro AV}{section.6}% 23
+\BOOKMARK [2][-]{subsection.6.2}{Architectures}{section.6}% 24
+\BOOKMARK [2][-]{subsection.6.3}{Networking}{section.6}% 25
+\BOOKMARK [2][-]{subsection.6.4}{Version Control}{section.6}% 26
+\BOOKMARK [2][-]{subsection.6.5}{Intro to ROS}{section.6}% 27
+\BOOKMARK [2][-]{subsection.6.6}{Modeling}{section.6}% 28
+\BOOKMARK [2][-]{subsection.6.7}{Odometry Calibration}{section.6}% 29
+\BOOKMARK [2][-]{subsection.6.8}{Signal Processing}{section.6}% 30
+\BOOKMARK [2][-]{subsection.6.9}{Computer Vision}{section.6}% 31
+\BOOKMARK [2][-]{subsection.6.10}{Estimation}{section.6}% 32
+\BOOKMARK [2][-]{subsection.6.11}{Control}{section.6}% 33
+\BOOKMARK [2][-]{subsection.6.12}{Planning}{section.6}% 34
+\BOOKMARK [2][-]{subsection.6.13}{Project Phase}{section.6}% 35
