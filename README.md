@@ -1,2 +1,2 @@
-# J18
-journal for keeping track of my stuff
+# Manual Duckietown
+Manual en español para entender el Hardware y software del Duckietown
